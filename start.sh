@@ -16,9 +16,9 @@ curl -s -X POST http://localhost:8001/services -d name=facility -d url=http://10
 curl -s -X POST http://localhost:8001/services -d name=user -d url=http://10.250.2.72:3002/ | python3 -mjson.tool
 
 #create route (endpoint for gateway) called facility
-curl -s -X POST http://localhost:8001/services/facility/routes -d paths[]=/| python3 -mjson.tool
+curl -s -X POST http://localhost:8001/services/facility/routes -d paths[]=/facility | python3 -mjson.tool
 
 #create route (endpoint for gateway) called facility
-curl -s -X POST http://localhost:8001/services/user/routes -d paths[]=/| python3 -mjson.tool
+curl -s -X POST http://localhost:8001/services/user/routes -d paths[]=/user | python3 -mjson.tool
 
  
