@@ -9,8 +9,6 @@ volumes:
 services:
   kong-db:
     image: postgres:11-alpine
-    volumes:
-      - kong-datastore:/var/lib/postgresql/data
     networks:
       - kong-net
     ports:
@@ -28,6 +26,8 @@ services:
       - kong-db
     networks:
       - kong-net
+    volumes:
+      - ./config:/etc/kong/
     ports:
       - "8000:8000" # Listener
       - "8001:8001" # Admin API
@@ -65,3 +65,19 @@ services:
       DB_PASSWORD: kong
       DB_DATABASE: api-gw
       NODE_ENV: development
+  kongmap:
+    image: docker.io/yesinteractive/kongmap
+    container_name: kongmap
+    environment:
+      - KONGMAP_CLUSTERS_JSON=$KONG_CLUSTERS
+      - KONGMAP_URL=http://localhost:8100
+    restart: always
+    ports:
+      - "8100:80"
+    networks:
+      - kong-net
+      
+      
+      
+
+    
